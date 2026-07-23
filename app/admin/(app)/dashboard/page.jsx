@@ -11,8 +11,8 @@ import {
   ArrowLeft,
   LayoutGrid,
 } from "lucide-react";
-import { supabase } from "@/lib/supabaseClient";
-import { getSiteSettings, pingDatabase } from "@/lib/siteSettings";
+import { supabase } from "@/lib/supabase/client";
+import { getSiteSettings, pingDatabase } from "@/services/site-settings";
 import { useAdminProfile, useHasPermission } from "@/components/admin/AdminProvider";
 import SystemStatus from "@/components/admin/SystemStatus";
 import MaintenanceCard from "@/components/admin/MaintenanceCard";

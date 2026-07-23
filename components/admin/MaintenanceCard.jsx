@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Wrench, Loader2, AlertTriangle } from "lucide-react";
-import { updateMaintenanceMode } from "@/lib/siteSettings";
+import { updateMaintenanceMode } from "@/services/site-settings";
 
 export default function MaintenanceCard({ settings, role, onUpdated, settingsError }) {
   const [enabled, setEnabled] = useState(settings?.maintenance_mode ?? false);

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Database, Globe, RefreshCw } from "lucide-react";
 import StatusPill from "./StatusPill";
-import { pingDatabase } from "@/lib/siteSettings";
+import { pingDatabase } from "@/services/site-settings";
 
 function formatTime(date) {
   if (!date) return "—";

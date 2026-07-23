@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { getCurrentAdmin } from "@/lib/adminAuth";
+import { getCurrentAdmin } from "@/lib/auth/admin-auth";
 import { AdminProvider } from "@/components/admin/AdminProvider";
 import AdminSidebar from "@/components/admin/AdminSidebar";
 

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import { createSupabaseServerClient } from "@/lib/supabaseServer";
-import { getCurrentAdmin } from "@/lib/adminAuth";
-import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { getCurrentAdmin } from "@/lib/auth/admin-auth";
+import { supabaseAdmin } from "@/lib/supabase/admin";
 
 /** GET: قائمة كل المشرفين والمدراء (لعرضها في /admin/users). */
 export async function GET() {

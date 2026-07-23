@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { getCurrentAdmin } from "@/lib/adminAuth";
-import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import { getCurrentAdmin } from "@/lib/auth/admin-auth";
+import { supabaseAdmin } from "@/lib/supabase/admin";
 
 /** PATCH: تعديل صلاحيات أو اسم مشرف موجود (متاح للمدير فقط). */
 export async function PATCH(request, { params }) {

@@ -23,7 +23,9 @@
       }
     ],
     "paths": {
-      "@/lib/*": ["./app/lib/*"],
+      "@/lib/*": ["./lib/*"],
+      "@/services/*": ["./services/*"],
+      "@/constants/*": ["./constants/*"],
       "@/*": [
         "./*"
       ]

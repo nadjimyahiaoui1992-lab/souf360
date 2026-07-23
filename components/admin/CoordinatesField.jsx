@@ -6,7 +6,7 @@ import {
   extractCoordsFromLink,
   looksLikeMapsLink,
   looksLikePlusCode,
-} from "@/lib/extractCoords";
+} from "@/services/coordinates";
 
 const MODES = [
   { id: "manual", label: "إدخال يدوي", icon: MapPin },

@@ -1,5 +1,5 @@
 import { Wrench } from "lucide-react";
-import { createSupabaseServerClient } from "@/lib/supabaseServer";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export const dynamic = "force-dynamic";
 
