@@ -1,0 +1,123 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+:root {
+  --background: #f8f5ef;
+  --foreground: #111827;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+::selection {
+  background: rgba(42, 157, 143, 0.28);
+  color: #0f172a;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+}
+
+.leaflet-control-attribution {
+  font-size: 10px;
+}
+
+/*
+  ملاحظة: تمت إزالة كل تنسيقات .custom-popup / .leaflet-popup-* الخاصة بنافذة
+  Leaflet المنبثقة الافتراضية (كود ميت) لأن بطاقة تفاصيل الموقع أصبحت مكوّن React
+  مخصصاً بالكامل (PlacePopupCard في Map.tsx)، ولم تعد الخريطة تستخدم <Popup> من
+  react-leaflet إطلاقاً.
+*/
+
+/*
+  إصلاح: كلاس "animate-fade-in" كان مستخدماً في عدة مكونات (Map.tsx، MapHero.tsx)
+  لكنه لم يكن معرّفاً في أي مكان (لا هنا ولا في إعدادات Tailwind)، أي أن التأثير
+  الحركي المقصود لم يكن يعمل إطلاقاً — العنصر كان يظهر فجأة بدون أي انتقال.
+*/
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.35s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in {
+    animation: none;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  80% {
+    transform: scale(2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.marker-pulse {
+  transform-origin: center;
+  animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+.marker-hover {
+  transition: all 0.3s ease;
+}
+.marker-hover:hover {
+  fill: #1e3c47 !important;
+  fill-opacity: 1 !important;
+  stroke: #ffffff !important;
+  stroke-width: 3px !important;
+}
+
+.glow {
+  filter: drop-shadow(0 0 8px rgba(42, 157, 143, 0.8));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marker-pulse,
+  .animate-ping,
+  .animate-bounce,
+  .animate-spin {
+    animation: none !important;
+  }
+}
