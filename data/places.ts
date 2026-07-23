@@ -1,4 +1,5 @@
-import { supabase } from '@/lib/supabaseClient';
+import { supabase } from '@/lib/supabase/client';
+import { decodeImageUrls } from '@/services/places';
 
 export type PlaceCategory = string;
 export type PlacePopularity = "high" | "medium" | "low";
@@ -32,15 +33,8 @@ export async function getPlacesFromDB(): Promise<Place[]> {
   }
 
   return data.map((item: any) => {
-    let finalImage = "/images/images.jpg";
-    if (item.image_url) {
-      try {
-        const parsed = JSON.parse(item.image_url);
-        finalImage = parsed[0] || item.image_url;
-      } catch (e) {
-        finalImage = String(item.image_url).replace(/[\[\]"]/g, '');
-      }
-    }
+    const images = decodeImageUrls(item.image_url);
+    const finalImage = images[0] || "/images/images.jpg";
 
     return {
       id: item.id,

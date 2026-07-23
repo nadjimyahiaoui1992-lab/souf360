@@ -3,8 +3,7 @@ import { NextResponse, type NextRequest } from "next/server";
 
 const PUBLIC_ADMIN_PATHS = ["/admin"];
 
-// التعديل هنا: تغيير اسم الدالة لتصبح proxy
-export async function proxy(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   let response = NextResponse.next({ request });
 
   const supabase = createServerClient(
