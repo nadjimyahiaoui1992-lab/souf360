@@ -29,7 +29,7 @@ export default function LandingPage() {
         <div 
           className="absolute inset-0 bg-cover bg-center scale-105 transition-transform duration-1000"
           style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1509316785289-025f5b846b35?q=80&w=1600&auto=format&fit=crop')`,
+            backgroundImage: `url('https://unsplash.com/fr/photos/personnes-marchant-sur-le-desert-pendant-la-journee-7EkyXZYeYsw')`,
           }}
         />
 
