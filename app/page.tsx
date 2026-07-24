@@ -1,102 +1,131 @@
+"use client";
 import Link from 'next/link';
-import { MapPin, Map, Compass, Award, Clock, Sparkles } from 'lucide-react';
+import { Map, Compass, Sparkles, LayoutDashboard } from 'lucide-react';
+import { useState, useEffect } from 'react';
+
+// يمكن تغيير اسم الموقع من هنا بسهولة ليعكس الهوية
+const SITE_CONFIG = {
+  name: "سوف 360",
+  subName: "SOUF DIGITAL",
+  description: "بوابتك الذكية لاستكشاف جوهرة الصحراء ومدينة الألف قبة",
+};
 
 export default function LandingPage() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
   return (
-    <main className="relative min-h-screen w-full flex flex-col items-center justify-between text-white overflow-hidden font-sans" dir="rtl">
+    <main className="relative min-h-screen w-full flex flex-col items-center justify-center text-white overflow-hidden font-sans" dir="rtl">
       
-      {/* خلفية صورة الصحراء مع التدرج الداكن */}
-      <div 
-        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat scale-105 transition-transform duration-1000"
-        style={{ 
-          backgroundImage: `url('https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=1920&auto=format&fit=crop')` 
-        }}
-      >
-        {/* طبقات التعتيم والتدرج اللوني البرتقالي الصحراوي */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/30 backdrop-blur-[2px]"></div>
-        <div className="absolute inset-0 bg-amber-950/20 mix-blend-overlay"></div>
-      </div>
-
-      {/* مساحة علوية فارغة للتوازن */}
-      <div className="relative z-10 pt-8"></div>
-
-      {/* المحتوى الرئيسي في المنتصف */}
-      <div className="relative z-10 max-w-4xl w-full text-center px-4 space-y-6 my-auto">
+      {/* الخلفية: فيديو احترافي بدلاً من الصورة ليعطي انطباعاً عالمياً */}
+      <div className="absolute inset-0 z-0">
+        <video 
+          autoPlay 
+          muted 
+          loop 
+          playsInline 
+          className="w-full h-full object-cover scale-105"
+        >
+          {/* تأكد من وضع ملف فيديو في مجلد public/assets/video/hero.mp4 */}
+          <source src="/assets/video/hero.mp4" type="video/mp4" />
+          {/* fallback في حال لم يعمل الفيديو */}
+          <div className="absolute inset-0 bg-black/60"></div>
+        </video>
         
-        {/* العنوان الشعار */}
-        <div className="space-y-4">
-          <div className="inline-flex items-center gap-2 bg-amber-500/20 border border-amber-500/40 px-4 py-1.5 rounded-full text-amber-300 text-xs font-bold backdrop-blur-md shadow-lg">
-            <Sparkles size={14} className="text-amber-400" />
-            <span>المنصة السياحية الرسمية</span>
+        {/* طبقات التدرج اللوني (Overlays) */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black/90"></div>
+        <div className="absolute inset-0 bg-amber-900/10 mix-blend-overlay"></div>
+      </div>
+
+      {/* المحتوى الرئيسي */}
+      <div className="relative z-10 max-w-5xl w-full text-center px-6 space-y-12">
+        
+        {/* الشعار المتميز (Professional Brand Identity) */}
+        <div className="flex flex-col items-center animate-fade-in">
+          <div className="relative group cursor-pointer">
+            <div className="absolute -inset-1 bg-gradient-to-r from-amber-500 to-orange-600 rounded-full blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+            <div className="relative bg-black/40 backdrop-blur-xl border border-white/10 p-6 rounded-full shadow-2xl">
+               {/* شعار SVG مخصص يدمج القبة بالنخلة */}
+               <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-amber-500">
+                  <path d="M50 10C30 10 10 30 10 50H90C90 30 70 10 50 10Z" stroke="currentColor" strokeWidth="4" />
+                  <path d="M50 50V90M50 60L35 75M50 60L65 75" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+                  <circle cx="50" cy="50" r="5" fill="currentColor" />
+               </svg>
+            </div>
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-black tracking-tight text-white drop-shadow-md">
-            سوف <span className="text-amber-500">360</span>
-          </h1>
-
-          <p className="text-lg md:text-2xl font-bold text-gray-100 drop-shadow">
-            اكتشف سحر الوادي... حيث تبدأ الحكاية وتنتهي الذكريات
-          </p>
-
-          <p className="text-xs md:text-sm text-gray-300 max-w-lg mx-auto leading-relaxed">
-            مع تموج الرمال الذهبية وفيطال النخيل وقبة الصحراء
-          </p>
+          <div className="mt-6 space-y-2">
+            <h1 className="text-6xl md:text-8xl font-black tracking-tighter italic">
+              <span className="text-white drop-shadow-2xl">{SITE_CONFIG.name.split(' ')[0]}</span>
+              <span className="text-amber-500 drop-shadow-2xl tracking-normal"> {SITE_CONFIG.name.split(' ')[1]}</span>
+            </h1>
+            <p className="text-amber-400 font-bold tracking-[0.5em] text-sm uppercase">
+              {SITE_CONFIG.subName}
+            </p>
+          </div>
         </div>
 
-        {/* أزرار التوجيه الرئيسية */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+        {/* النبذة الاحترافية */}
+        <div className="max-w-2xl mx-auto space-y-4">
+          <h2 className="text-xl md:text-3xl font-light text-gray-200 leading-relaxed">
+            {SITE_CONFIG.description}
+          </h2>
+          <div className="flex justify-center gap-2">
+             <span className="h-1 w-12 bg-amber-500 rounded-full"></span>
+             <span className="h-1 w-4 bg-white/30 rounded-full"></span>
+             <span className="h-1 w-4 bg-white/30 rounded-full"></span>
+          </div>
+        </div>
+
+        {/* الأزرار الاحترافية المطلوبة */}
+        <div className="flex flex-col md:flex-row items-center justify-center gap-8 pt-8">
           
-          {/* زر استكشاف المعالم */}
-          <Link
-            href="/explore"
-            className="w-full sm:w-auto flex items-center justify-center gap-2.5 bg-amber-600/90 hover:bg-amber-600 text-white font-bold px-8 py-3.5 rounded-xl shadow-xl border border-amber-500/30 backdrop-blur-md transition-all duration-300 hover:scale-105 text-sm"
-          >
-            <MapPin size={18} className="text-amber-200" />
-            <span>استكشف المعالم</span>
+          {/* الزر الأول: استكشاف المنصة */}
+          <Link href="/discover" className="group relative">
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-500 to-yellow-600 rounded-2xl blur opacity-30 group-hover:opacity-100 transition duration-300"></div>
+            <button className="relative flex items-center gap-4 bg-white/10 backdrop-blur-2xl border border-white/20 px-10 py-5 rounded-2xl transition-all duration-300 group-hover:bg-white/20">
+              <div className="p-3 bg-amber-500 rounded-xl text-black shadow-lg">
+                <Compass size={24} className="animate-spin-slow" />
+              </div>
+              <div className="text-right">
+                <span className="block text-xs text-amber-400 font-bold mb-1">اكتشف الآن</span>
+                <span className="text-xl font-black text-white italic">مزايا المنصة</span>
+              </div>
+            </button>
           </Link>
 
-          {/* زر عرض الخريطة */}
-          <Link
-            href="/map"
-            className="w-full sm:w-auto flex items-center justify-center gap-2.5 bg-slate-900/60 hover:bg-slate-900/80 text-white font-bold px-8 py-3.5 rounded-xl shadow-xl border border-white/20 backdrop-blur-md transition-all duration-300 hover:scale-105 text-sm"
-          >
-            <Map size={18} className="text-sky-400" />
-            <span>عرض الخريطة</span>
+          {/* الزر الثاني: الخريطة التفاعلية */}
+          <Link href="/map" className="group relative">
+            <button className="relative flex items-center gap-4 bg-slate-900/80 backdrop-blur-2xl border border-sky-500/30 px-10 py-5 rounded-2xl transition-all duration-300 hover:border-sky-400">
+              <div className="p-3 bg-sky-600/20 rounded-xl text-sky-400 shadow-inner">
+                <Map size={24} />
+              </div>
+              <div className="text-right">
+                <span className="block text-xs text-sky-400 font-bold mb-1">الملاحة الذكية</span>
+                <span className="text-xl font-black text-white italic">خريطة تفاعلية</span>
+              </div>
+            </button>
           </Link>
 
         </div>
 
       </div>
 
-      {/* شريط الإحصائيات السفلي */}
-      <div className="relative z-10 w-full max-w-5xl mx-auto px-4 pb-8 pt-4">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-slate-950/60 backdrop-blur-xl border border-white/10 rounded-2xl p-4 shadow-2xl">
-          
-          <div className="flex flex-col items-center text-center space-y-1">
-            <Compass className="text-amber-400" size={22} />
-            <span className="text-white font-bold text-sm">معالم سياحية</span>
-            <span className="text-amber-500 font-extrabold text-base">360+</span>
-          </div>
+      {/* رابط لوحة التحكم (مخفي بشكل أنيق للمشرفين) */}
+      <Link href="/admin/login" className="absolute top-8 left-8 p-3 bg-white/5 backdrop-blur-md rounded-full border border-white/10 hover:bg-white/10 transition-all opacity-40 hover:opacity-100">
+        <LayoutDashboard size={20} />
+      </Link>
 
-          <div className="flex flex-col items-center text-center space-y-1">
-            <MapPin className="text-amber-400" size={22} />
-            <span className="text-white font-bold text-sm">تجارب متنوعة</span>
-            <span className="text-amber-500 font-extrabold text-base">50+</span>
-          </div>
-
-          <div className="flex flex-col items-center text-center space-y-1">
-            <Award className="text-amber-400" size={22} />
-            <span className="text-white font-bold text-sm">أماكن موثقة</span>
-            <span className="text-amber-500 font-extrabold text-base">100%</span>
-          </div>
-
-          <div className="flex flex-col items-center text-center space-y-1">
-            <Clock className="text-amber-400" size={22} />
-            <span className="text-white font-bold text-sm">محدث باستمرار</span>
-            <span className="text-amber-500 font-extrabold text-base">24/7</span>
-          </div>
-
-        </div>
+      {/* زر اللغة السريع في الهبوط */}
+      <div className="absolute top-8 right-8 flex gap-4 text-xs font-bold bg-black/20 backdrop-blur-md p-2 rounded-full border border-white/10">
+        <button className="px-3 py-1 bg-amber-500 rounded-full text-black">AR</button>
+        <button className="px-3 py-1 hover:text-amber-500">FR</button>
+        <button className="px-3 py-1 hover:text-amber-500">EN</button>
       </div>
 
     </main>
