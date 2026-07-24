@@ -1,125 +1,129 @@
-"use client";
 import Link from 'next/link';
-import { Map, Compass, LayoutDashboard } from 'lucide-react';
-import { useState, useEffect } from 'react';
-
-const SITE_CONFIG = {
-  name: "سوف 360",
-  subName: "دليل السياحة في الوادي",
-  description: "اكتشف سحر الوادي حيث تبدأ الحكاية وتنتهي الذكريات مع تموج الرمال الذهبية وغيطان النخيل وقبة الصحراء.",
-};
+import { MapPin, Map, Compass, Award, Clock3, Sparkles, ChevronDown } from 'lucide-react';
 
 export default function LandingPage() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
-
   return (
-    <main className="relative min-h-screen w-full flex flex-col items-center justify-between text-white overflow-hidden font-sans py-6 px-4" dir="rtl">
-      
-      {/* الخلفية البانورامية المستوحاة من صورتك (رمال، نخيل، غروب وقباب) */}
-      <div className="absolute inset-0 z-0 bg-[#1c1208]">
-        <div 
-          className="absolute inset-0 bg-cover bg-center scale-105"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1509316785289-025f5b846b35?q=80&w=1600&auto=format&fit=crop')`,
-          }}
-        />
-        {/* طبقات تدرج دافئة تدمج ألوان الغروب الصحراوي مع التعتيم لبروز النصوص */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#120a05] via-[#2a1708]/80 to-amber-950/40"></div>
-        <div className="absolute inset-0 bg-black/30"></div>
+    <main
+      dir="rtl"
+      className="relative min-h-screen w-full flex flex-col text-white overflow-hidden"
+      style={{ fontFamily: "'Tajawal', 'IBM Plex Sans Arabic', sans-serif" }}
+    >
+      {/* خطوط عربية مميزة: تجوال للعناوين، آي بي إم بلكس للنصوص */}
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap');
+        @keyframes riseIn { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes driftSlow { from { transform: translateX(0); } to { transform: translateX(-4%); } }
+        .rise-1 { animation: riseIn 0.9s cubic-bezier(0.16,1,0.3,1) 0.05s both; }
+        .rise-2 { animation: riseIn 0.9s cubic-bezier(0.16,1,0.3,1) 0.2s both; }
+        .rise-3 { animation: riseIn 0.9s cubic-bezier(0.16,1,0.3,1) 0.35s both; }
+        .rise-4 { animation: riseIn 0.9s cubic-bezier(0.16,1,0.3,1) 0.5s both; }
+        .rise-5 { animation: riseIn 0.9s cubic-bezier(0.16,1,0.3,1) 0.65s both; }
+        .dune-drift { animation: driftSlow 40s linear infinite alternate; }
+        @media (prefers-reduced-motion: reduce) {
+          .rise-1, .rise-2, .rise-3, .rise-4, .rise-5, .dune-drift { animation: none !important; }
+        }
+      `}</style>
+
+      {/* خلفية الصحراء: كثبان ذهبية وواحة نخيل، تعكس طبيعة واد سوف الفلاحية وسط الرمال */}
+      <div
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url('https://images.unsplash.com/photo-1770557386874-739c55a381f3?q=80&w=1920&auto=format&fit=crop')`,
+        }}
+      >
+        {/* تدرج من سماء ليلية نيلية أعلى الصورة إلى عتمة سفلية، يحاكي غروب الوادي */}
+        <div className="absolute inset-0 bg-gradient-to-b from-indigo-950/70 via-black/20 to-black/85" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-amber-900/10 mix-blend-overlay" />
       </div>
 
-      {/* الشريط العلوي المصغر */}
-      <div className="relative z-20 w-full max-w-2xl flex items-center justify-between px-2">
-        <Link href="/admin" className="p-2 bg-black/40 hover:bg-black/60 backdrop-blur-md rounded-xl border border-white/10 transition-all text-gray-300 hover:text-white shadow-md">
-          <LayoutDashboard size={16} />
-        </Link>
+      {/* خط أفق القِباب: توقيع بصري مرسوم يدويًا يحيل إلى لقب "مدينة الألف قبة وقبة" */}
+      <div className="absolute inset-x-0 bottom-0 z-[1] h-24 md:h-32 opacity-90 pointer-events-none">
+        <svg className="w-full h-full" viewBox="0 0 1200 120" preserveAspectRatio="none" fill="none">
+          <path
+            d="M0 120 L0 74 Q20 74 20 60 A18 18 0 0 1 56 60 Q56 74 76 74 L110 74 Q110 60 122 60 A14 14 0 0 1 150 60 Q150 74 162 74 L205 74 Q205 52 222 52 A24 24 0 0 1 270 52 Q270 74 287 74 L330 74 Q330 62 342 62 A15 15 0 0 1 372 62 Q372 74 384 74 L430 74 Q430 46 452 46 A28 28 0 0 1 508 46 Q508 74 530 74 L575 74 Q575 60 587 60 A14 14 0 0 1 615 60 Q615 74 627 74 L672 74 Q672 50 692 50 A26 26 0 0 1 744 50 Q744 74 764 74 L805 74 Q805 62 817 62 A15 15 0 0 1 847 62 Q847 74 859 74 L905 74 Q905 44 928 44 A29 29 0 0 1 986 44 Q986 74 1009 74 L1050 74 Q1050 60 1062 60 A14 14 0 0 1 1090 60 Q1090 74 1102 74 L1200 74 L1200 120 Z"
+            fill="#050505"
+            fillOpacity="0.9"
+          />
+        </svg>
+      </div>
 
-        <div className="flex items-center gap-1 bg-black/40 backdrop-blur-md px-3 py-1 rounded-xl border border-white/10 text-[11px] font-bold shadow-md">
-          <button className="px-2 py-0.5 bg-amber-500 text-black rounded-lg">AR</button>
-          <button className="px-2 py-0.5 text-gray-300 hover:text-white">FR</button>
-          <button className="px-2.5 py-0.5 text-gray-300 hover:text-white">EN</button>
+      {/* شارة علوية صغيرة */}
+      <div className="relative z-10 pt-7 flex justify-center rise-1">
+        <div className="inline-flex items-center gap-2 bg-amber-500/15 border border-amber-400/40 px-4 py-1.5 rounded-full text-amber-300 text-[11px] font-bold tracking-wide backdrop-blur-md">
+          <Sparkles size={13} className="text-amber-400" />
+          <span>المنصة السياحية الرسمية لوادي سوف</span>
         </div>
       </div>
 
       {/* المحتوى الرئيسي */}
-      <div className="relative z-10 max-w-lg w-full text-center flex flex-col items-center my-auto space-y-6">
-        
-        {/* الشعار والهوية البصرية */}
-        <div className="flex flex-col items-center space-y-3">
-          <div className="bg-gradient-to-br from-amber-500/30 to-black/60 backdrop-blur-xl border border-amber-500/40 p-4 rounded-2xl shadow-2xl">
-             <svg width="48" height="48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-amber-400">
-                <path d="M50 10C30 10 10 30 10 50H90C90 30 70 10 50 10Z" stroke="currentColor" strokeWidth="5" />
-                <path d="M50 50V90M50 60L35 75M50 60L65 75" stroke="currentColor" strokeWidth="5" strokeLinecap="round" />
-                <circle cx="50" cy="50" r="6" fill="currentColor" />
-             </svg>
-          </div>
-          
-          <div>
-            <h1 className="text-4xl md:text-5xl font-black tracking-tight drop-shadow-md">
-              <span className="text-white">سوف</span>
-              <span className="text-amber-400"> 360</span>
-            </h1>
-            <p className="text-amber-300/90 font-bold tracking-[0.2em] text-[11px] uppercase mt-1 drop-shadow">
-              {SITE_CONFIG.subName}
-            </p>
-          </div>
+      <div className="relative z-10 flex-1 flex flex-col items-center justify-center max-w-4xl w-full mx-auto text-center px-5 space-y-7 py-10">
+        <div className="space-y-5">
+          <h1 className="rise-2 text-6xl md:text-8xl font-black tracking-tight text-white drop-shadow-[0_2px_20px_rgba(0,0,0,0.5)]">
+            سوف <span className="text-amber-500">360</span>
+          </h1>
+
+          <p className="rise-3 text-xl md:text-3xl font-bold text-gray-100 drop-shadow max-w-2xl mx-auto leading-snug">
+            اكتشف سحر الوادي… حيث تبدأ الحكاية وتنتهي الذكريات
+          </p>
+
+          <p className="rise-3 text-sm md:text-base text-gray-300 max-w-lg mx-auto leading-relaxed font-medium">
+            كثبان ذهبية، وغيطان ونخيل، وواحات وأراضٍ فلاحية تخضرّ وسط الصحراء، وقِباب بيضاء تروي حكاية مدينة الألف قبة وقبة
+          </p>
         </div>
 
-        {/* الوصف والنبذة */}
-        <p className="text-xs md:text-sm text-gray-200 font-medium leading-relaxed px-4 drop-shadow">
-          {SITE_CONFIG.description}
-        </p>
-
-        {/* الأزرار الاحترافية المطلوبة */}
-        <div className="w-full space-y-3.5 pt-3">
-          
-          {/* الزر الأول: اكتشف مزايا المنصة */}
-          <Link href="/explore" className="block w-full group">
-            <div className="flex items-center justify-between bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-black p-4 rounded-xl shadow-xl transition-all font-bold">
-              <div className="flex items-center gap-3.5">
-                <div className="p-2.5 bg-black/10 rounded-lg">
-                  <Compass size={20} />
-                </div>
-                <div className="text-right">
-                  <span className="block text-[10px] text-black/70 font-bold">استكشاف الوجهات</span>
-                  <span className="text-sm font-black">مزايا المنصة والمعالم</span>
-                </div>
-              </div>
-              <span className="text-xs font-black pl-1">←</span>
-            </div>
+        {/* أزرار التوجيه */}
+        <div className="rise-4 flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+          <Link
+            href="/explore"
+            className="group w-full sm:w-auto flex items-center justify-center gap-2.5 bg-amber-500 hover:bg-amber-400 text-black font-bold px-9 py-4 rounded-xl shadow-[0_8px_30px_rgba(245,158,11,0.35)] transition-all duration-300 hover:scale-[1.03] text-sm"
+          >
+            <MapPin size={18} className="transition-transform group-hover:-translate-y-0.5" />
+            <span>استكشف المعالم</span>
           </Link>
 
-          {/* الزر الثاني: الخريطة التفاعلية */}
-          <Link href="/map" className="block w-full group">
-            <div className="flex items-center justify-between bg-slate-900/90 hover:bg-slate-800 border border-sky-500/40 text-white p-4 rounded-xl shadow-xl transition-all font-bold">
-              <div className="flex items-center gap-3.5">
-                <div className="p-2.5 bg-sky-500/20 text-sky-400 rounded-lg">
-                  <Map size={20} />
-                </div>
-                <div className="text-right">
-                  <span className="block text-[10px] text-sky-400 font-bold">الملاحة الذكية</span>
-                  <span className="text-sm font-black">خريطة تفاعلية داخلية</span>
-                </div>
-              </div>
-              <span className="text-xs font-black text-sky-400 pl-1">←</span>
-            </div>
+          <Link
+            href="/map"
+            className="w-full sm:w-auto flex items-center justify-center gap-2.5 bg-white/5 hover:bg-white/10 text-white font-bold px-9 py-4 rounded-xl border border-white/25 backdrop-blur-md transition-all duration-300 hover:scale-[1.03] text-sm"
+          >
+            <Map size={18} className="text-sky-300" />
+            <span>عرض الخريطة</span>
           </Link>
+        </div>
+      </div>
 
+      {/* فاصل زخرفي: خط الكثبان النجمية، إشارة إلى الشكل الفريد لكثبان سوف */}
+      <div className="relative z-10 w-full overflow-hidden h-6 opacity-40">
+        <svg className="dune-drift w-[140%]" viewBox="0 0 1400 24" preserveAspectRatio="none" fill="none">
+          <path
+            d="M0 18 Q 35 4, 70 18 T 140 18 T 210 18 T 280 18 T 350 18 T 420 18 T 490 18 T 560 18 T 630 18 T 700 18 T 770 18 T 840 18 T 910 18 T 980 18 T 1050 18 T 1120 18 T 1190 18 T 1260 18 T 1330 18 T 1400 18"
+            stroke="#f59e0b"
+            strokeWidth="1"
+          />
+        </svg>
+      </div>
+
+      {/* شريط الإحصائيات */}
+      <div className="rise-5 relative z-10 w-full max-w-4xl mx-auto px-5 pb-9">
+        <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-x-reverse divide-white/10 bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden">
+          {[
+            { icon: Compass, label: 'معالم سياحية', value: '360+' },
+            { icon: MapPin, label: 'تجارب متنوعة', value: '50+' },
+            { icon: Award, label: 'أماكن موثقة', value: '100%' },
+            { icon: Clock3, label: 'محدث باستمرار', value: '24/7' },
+          ].map(({ icon: Icon, label, value }) => (
+            <div key={label} className="flex flex-col items-center justify-center gap-1.5 py-5 px-2 text-center">
+              <Icon className="text-amber-400" size={20} strokeWidth={2} />
+              <span className="text-white/90 font-semibold text-xs md:text-sm">{label}</span>
+              <span className="text-amber-500 font-extrabold text-lg">{value}</span>
+            </div>
+          ))}
         </div>
 
+        <div className="flex justify-center pt-4">
+          <ChevronDown size={18} className="text-white/50" />
+        </div>
       </div>
-
-      {/* حقوق النشر */}
-      <div className="relative z-10 text-[10px] text-gray-400 font-medium text-center drop-shadow">
-        جميع الحقوق محفوظة © {new Date().getFullYear()} - سوف 360
-      </div>
-
     </main>
   );
 }
