@@ -119,7 +119,7 @@ export default function Map({
       ? '&copy; Esri &mdash; Source: Esri, Maxar, Earthstar Geographics'
       : '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
 
-  // حساب مسار حقيقي عبر الشوارع (يتبع الطرق الرئيسية والفرعية فعلياً) مع تبديل تلقائي بين الخوادم عند الفشل
+  // حساب مسار حقيقي يبدأ حصرياً من موقع الزائر (نقطة البداية) إلى المعلم (نقطة النهاية)
   useEffect(() => {
     let cancelled = false;
 
@@ -201,7 +201,7 @@ export default function Map({
         <Marker position={[userLocation.lat, userLocation.lng]} icon={visitorIcon}>
           <Popup className="soufmap-popup">
             <div className="text-right font-sans text-xs p-1" dir="rtl">
-              <span className="font-bold text-sky-600">👤 موقعك الحالي (الزائر)</span>
+              <span className="font-bold text-sky-600">👤 موقعك الحالي (الزائر - نقطة البداية)</span>
             </div>
           </Popup>
         </Marker>
@@ -252,7 +252,7 @@ export default function Map({
                 onClick={() => onRequestRoute && onRequestRoute(place)}
                 className="mt-2 w-full bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold py-2 rounded-lg transition-colors"
               >
-                عرض المسار الدقيق 🧭
+                عرض المسار من موقعك إلى المعلم 🧭
               </button>
             </div>
           </Popup>
