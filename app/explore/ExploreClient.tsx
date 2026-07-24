@@ -504,4 +504,102 @@ function MemoriesGallery({ memories }: { memories: OldMemory[] }) {
                   </div>
                 )}
                 {m.caption && (
-                  <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 to-transparent
+                  <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 to-transparent p-3 text-xs text-stone-200">
+                    {m.caption}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </section>
+  );
+}
+
+function WilayaIntro() {
+  return (
+    <section className="bg-gradient-to-br from-amber-950/20 via-[#15120e] to-black p-6 sm:p-10 rounded-[2rem] border border-amber-500/10">
+      <h3 className="text-xl sm:text-2xl font-black mb-3 text-amber-400">عن ولاية الوادي (السوف)</h3>
+      <p className="text-stone-300 text-sm leading-relaxed">
+        تتميز مدينة الوادي بطراز معماري فريد يعتمد على القباب (الأسقف المقببة) التي صُممت خصيصاً لمقاومة الحرارة الشديدة، إلى جانب غيطان النخيل الفريدة التي تُغرس في الكثبان الرملية (الغيطان).
+      </p>
+    </section>
+  );
+}
+
+function VisitorExperiences({
+  testimonials,
+  onShare,
+}: {
+  testimonials: Testimonial[];
+  onShare: () => void;
+}) {
+  return (
+    <section>
+      <div className="flex items-center justify-between mb-6">
+        <SectionEyebrow
+          icon={MessageSquareHeart}
+          eyebrow="الزوار"
+          title="تجارب وانطباعات"
+          subtitle="ما يقوله الزوار عن زيارتهم لولاية الوادي"
+        />
+        <button
+          onClick={onShare}
+          className="bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition shadow-lg shrink-0 flex items-center gap-1.5"
+        >
+          <Upload size={16} /> شارك تجربتك
+        </button>
+      </div>
+
+      {testimonials.length === 0 ? (
+        <div className="text-center py-10 bg-white/5 rounded-2xl border border-white/5">
+          <p className="text-stone-400">لا توجد تجارب منشورة بعد. كن أول المشاركين!</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {testimonials.map((t) => (
+            <div key={t.id} className="bg-[#15120e] p-5 rounded-2xl border border-white/5 shadow-md flex flex-col justify-between">
+              <p className="text-stone-300 text-sm leading-relaxed mb-4 italic">"{t.message}"</p>
+              <div className="flex items-center justify-between text-xs text-stone-400 border-t border-white/5 pt-3">
+                <span className="font-bold text-amber-300">{t.name || 'زائر كريم'}</span>
+                <span>{t.created_at ? new Date(t.created_at).toLocaleDateString('ar-DZ') : ''}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </section>
+  );
+}
+
+function ShareExperienceModal({ onClose }: { onClose: () => void }) {
+  return (
+    <div dir="rtl" className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-md p-4" onClick={onClose}>
+      <div className="bg-[#171310] w-full max-w-md rounded-3xl border border-white/10 p-6 relative shadow-2xl" onClick={(e) => e.stopPropagation()}>
+        <button onClick={onClose} className="absolute top-4 left-4 text-stone-400 hover:text-white">
+          <X size={20} />
+        </button>
+        <h3 className="text-lg font-black mb-4 text-white">شارك تجربتك في سوف 360</h3>
+        <p className="text-stone-400 text-xs mb-4">قريباً سيتم تفعيل نموذج المشاركة المباشر لإضافة قصتك وصورك.</p>
+        <button onClick={onClose} className="w-full bg-white/10 hover:bg-white/20 text-white font-bold py-2.5 rounded-xl text-sm transition">
+          إغلاق
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="border-t border-white/5 py-10 text-center text-xs text-stone-500 bg-[#070605]">
+      <div className="max-w-5xl mx-auto px-4 flex flex-col items-center gap-3">
+        <div className="flex items-center gap-2">
+          <LogoMark size={20} className="text-amber-500" />
+          <span className="font-bold text-stone-300">سوف 360</span>
+        </div>
+        <p>جميع Rights المحفوظة © {new Date().getFullYear()} - منصة السياحة التفاعلية لولاية الوادي</p>
+      </div>
+    </footer>
+  );
+}
